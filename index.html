@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Long Line Fix</title>
+<style>
+*{box-sizing:border-box;min-width:0;overflow-wrap:anywhere}
+body{margin:0;padding:12px;font-family:sans-serif;background:#f4efe6;color:#222}
+h1{font-size:20px}
+#frame{width:360px;max-width:100%;border:2px dashed #888;padding:8px;background:#faf7f0}
+.row{display:flex;gap:8px;align-items:flex-start}
+.box{flex:1;background:#fff;border:2px solid #4a7c3a;border-radius:8px;padding:8px}
+.pic{flex:0 0 60px;height:60px;background:#c8552e;border-radius:8px}
+</style></head><body>
+<script data-bean-store>(function(){if(typeof location!=='undefined'&&location&&location.protocol==='about:'&&typeof document!=='undefined'&&document.addEventListener){document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href^="#"]');if(!a||a.target==='_blank')return;e.preventDefault();try{location.hash=a.getAttribute('href')}catch(x){}},true)}if(typeof window==='undefined')return;try{window.localStorage.getItem('x');return}catch(e){}var d=Object.assign({},window.__BEAN_SAVED||{});function post(){try{parent.postMessage({type:'bean-store',data:d},'*')}catch(e){}}var ls={getItem:function(k){return Object.prototype.hasOwnProperty.call(d,k)?d[k]:null},setItem:function(k,v){d[k]=String(v);post()},removeItem:function(k){delete d[k];post()},clear:function(){d={};post()},key:function(i){return Object.keys(d)[i]||null}};Object.defineProperty(ls,'length',{get:function(){return Object.keys(d).length}});try{Object.defineProperty(window,'localStorage',{value:ls,configurable:true})}catch(e){}})();</script>
+<h1>Long Line Fix</h1>
+<div id="frame">
+<div class="row">
+<div class="pic"></div>
+<div class="box">Here is the line: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+</div>
+</div>
+<script>
+window.onload=function(){try{
+var bad=[];var f=document.getElementById('frame');var r=f.getBoundingClientRect().right;
+if(f.scrollWidth>f.clientWidth)bad.push('frame content wider than frame');
+if(document.documentElement.scrollWidth>window.innerWidth)bad.push('page wider than window');
+f.querySelectorAll('*').forEach(function(e){if(e.getBoundingClientRect().right>r+0.5)bad.push(e.tagName+'.'+e.className)});
+if(bad.length)console.error('EDGE FAIL',bad);
+}catch(e){console.error('check crashed',e)}};
+</script>
+</body></html>
